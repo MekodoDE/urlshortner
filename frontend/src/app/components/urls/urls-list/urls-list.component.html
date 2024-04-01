@@ -1,0 +1,25 @@
+<div class="mt-3">
+  <a class="btn btn-success" routerLink="/urls/create">Add New URL</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>URL Key</th>
+        <th>Redirect URL</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let url of urls" [ngClass]="{ 'disabled-row': url.is_disabled }">
+        <td>{{ url.url_key }}</td>
+        <td>{{ url.redirect_url }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="editUrl(url)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteUrl(url)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

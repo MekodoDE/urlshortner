@@ -1,0 +1,13 @@
+<h2>Create New URL</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="urlKey">URL Key:</label>
+    <input type="text" class="form-control" id="urlKey" [(ngModel)]="urlKey" name="urlKey" required>
+  </div>
+  <div class="form-group">
+    <label for="redirectUrl">Redirect URL:</label>
+    <input type="text" class="form-control" id="redirectUrl" [(ngModel)]="redirectUrl" name="redirectUrl" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
