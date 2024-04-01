@@ -1,0 +1,26 @@
+### Get all users
+GET http://127.0.0.1:5001/
+
+### Create user
+POST http://127.0.0.1:5001/
+Content-Type: application/json
+
+{
+  "username": "example_user",
+  "email": "example@example.com",
+  "password": "example_password"
+}
+
+### Get user by ID
+GET http://127.0.0.1:5001/b0f8b145-7bdc-4553-8fa9-d18c1fae4771
+
+### Update user by ID
+PUT http://127.0.0.1:5001/b0f8b145-7bdc-4553-8fa9-d18c1fae4771
+Content-Type: application/json
+
+{
+  "username": "new_username"
+}
+
+### Delete user by ID
+DELETE http://127.0.0.1:5001/b0f8b145-7bdc-4553-8fa9-d18c1fae4771
