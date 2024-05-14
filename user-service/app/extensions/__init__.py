@@ -1,4 +1,4 @@
-from . import smorest, database
+from . import smorest, database, jwt
 
 def init_app(app, register_blueprints=None):
     """
@@ -14,3 +14,6 @@ def init_app(app, register_blueprints=None):
 
     # Initialize database extension
     database.init_app(app)
+
+    # Initialize jwt extension
+    jwt.init_app(app)

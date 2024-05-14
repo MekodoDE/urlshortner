@@ -1,7 +1,8 @@
-from flask import request
+from flask import request, jsonify
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from flask_jwt_extended import create_access_token, jwt_required
 
 from app.extensions.database import db
 from app.models import User
@@ -93,3 +94,24 @@ class UserById(MethodView):
             message = [str(x) for x in e.args]
             abort(500, message=e.__class__.__name__, errors=message)
         return {}
+
+@blp.route('/login')
+class Users(MethodView):
+    """
+    Endpoint for login.
+    """
+
+    @blp.arguments(UserSchema(only=('username', 'password')))
+    @blp.response(200)
+    def post(self, args):
+        username = args['username']
+        password = args['password']
+
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.password == password:
+            # Generate access token (JWT) using user's ID as the identity
+            access_token = create_access_token(identity=user.id)
+            return jsonify(access_token=access_token)
+        else:
+            abort(401, message='Invalid username or password')

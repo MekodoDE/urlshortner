@@ -5,8 +5,9 @@ class Config(object):
     API_TITLE = 'user-service'
     OPENAPI_VERSION = '3.0.2'
     OPENAPI_URL_PREFIX = '/'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
     CORS_ORIGINS = ["*"]
+    JWT_SECRET_KEY = "super-secret"
 class ProductionConfig(Config):
     DATABASE_URI = 'mysql://user@127.0.0.1/users'
 class DevelopmentConfig(Config):

@@ -12,10 +12,10 @@ Content-Type: application/json
 }
 
 ### Get user by ID
-GET http://127.0.0.1:5001/b0f8b145-7bdc-4553-8fa9-d18c1fae4771
+GET http://127.0.0.1:5001/584533d2-225e-4fb1-87a6-20b492b54187
 
 ### Update user by ID
-PUT http://127.0.0.1:5001/b0f8b145-7bdc-4553-8fa9-d18c1fae4771
+PUT http://127.0.0.1:5001/584533d2-225e-4fb1-87a6-20b492b54187
 Content-Type: application/json
 
 {
@@ -23,4 +23,13 @@ Content-Type: application/json
 }
 
 ### Delete user by ID
-DELETE http://127.0.0.1:5001/b0f8b145-7bdc-4553-8fa9-d18c1fae4771
+DELETE http://127.0.0.1:5001/584533d2-225e-4fb1-87a6-20b492b54187
+
+### Login user
+POST http://127.0.0.1:5001/login
+Content-Type: application/json
+
+{
+  "username": "example_user",
+  "password": "example_password"
+}
