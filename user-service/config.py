@@ -12,3 +12,5 @@ class ProductionConfig(Config):
     DATABASE_URI = 'mysql://user@127.0.0.1/users'
 class DevelopmentConfig(Config):
     DEBUG = True
+class TestConfig(Config):
+    TESTING = True
