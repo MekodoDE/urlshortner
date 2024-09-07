@@ -6,3 +6,4 @@ flask_cors
 Flask-JWT-Extended
 sqlalchemy_utils
 marshmallow_sqlalchemy
+pytest
