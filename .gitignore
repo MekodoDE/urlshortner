@@ -9,3 +9,4 @@ __pycache__/
 *$py.class
 migrations/
 **/instance
+**/.pytest_cache
