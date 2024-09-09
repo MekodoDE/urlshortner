@@ -1,8 +1,9 @@
 import pytest
 import os
 from app import create_app
+from app.extensions.database import db
 
-db_path = "./instance/test2.db"
+db_path = "./instance/test.db"
 
 class UserData:
     id = None
@@ -15,9 +16,13 @@ class UserData:
 @pytest.fixture(scope='session')
 def app():
     _app = create_app()
-    yield _app
-    if os.path.exists(db_path):
-        os.remove(db_path)
+
+    with _app.app_context():
+        yield _app
+        db.session.remove()
+        db.engine.dispose()
+        if os.path.exists(db_path):
+            os.remove(db_path)
 
 @pytest.fixture(scope='session')
 def client(app):
