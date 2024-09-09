@@ -2,7 +2,7 @@ import marshmallow as mar
 from marshmallow_sqlalchemy import field_for
 
 from app.extensions.database import ma
-from app.models import Url
+from app.models import UrlModel
 
 class UrlSchema(ma.SQLAlchemySchema):
     """
@@ -10,17 +10,17 @@ class UrlSchema(ma.SQLAlchemySchema):
     """
 
     class Meta:
-        model = Url
+        model = UrlModel
         ordered = True
         unknown = mar.EXCLUDE
 
     # Fields to include in the schema
-    id = field_for(Url, "id", dump_only=True)
-    owner_id = field_for(Url, "owner_id", required=True)
-    url_key = field_for(Url, "url_key")
-    redirect_url = field_for(Url, "redirect_url", required=True)
-    is_disabled = field_for(Url, "is_disabled", default=False)
-    created_at = field_for(Url, "created_at", dump_only=True)
+    id = field_for(UrlModel, "id", dump_only=True)
+    owner_id = field_for(UrlModel, "owner_id", required=True)
+    url_key = field_for(UrlModel, "url_key")
+    redirect_url = field_for(UrlModel, "redirect_url", required=True)
+    is_active = field_for(UrlModel, "is_active", dump_default=True)
+    created_at = field_for(UrlModel, "created_at", dump_only=True)
 
 class UrlQueryArgsSchema(ma.Schema):
     """
