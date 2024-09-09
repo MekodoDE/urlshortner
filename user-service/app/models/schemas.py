@@ -28,7 +28,7 @@ class UserSchema(ma.SQLAlchemySchema):
     username = field_for(User, "username", required=True)
     email = field_for(User, "email", required=True)
     password = field_for(User, "password", load_only=True)  # Load only for security
-    is_admin = field_for(User, "is_admin", dump_default=False)
+    role = field_for(User, "role", dump_default=False)
     is_active = field_for(User, "is_active", dump_default=True)
     created_at = field_for(User, "created_at", dump_only=True)
     updated_at = field_for(User, "updated_at", dump_only=True)
@@ -43,7 +43,7 @@ class UserSchema(ma.SQLAlchemySchema):
 
 class BasicUserSchema(UserSchema):
     class Meta(UserSchema.Meta):
-        exclude = ("password", "is_admin")
+        exclude = ("password", "role")
 
 class AdminUserSchema(UserSchema):
     class Meta(UserSchema.Meta):

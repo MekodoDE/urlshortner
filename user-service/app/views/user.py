@@ -28,7 +28,7 @@ class Users(MethodView):
         """
         current_user_id = uuid.UUID(get_jwt_identity())
         current_user = User.query.get_or_404(current_user_id, description="Your User have not been found")
-        if not current_user.is_admin:
+        if current_user.role != "admin":
             abort(403, message="You are not authorized to view this user")
 
         return User.query.filter_by(**args)
@@ -67,7 +67,7 @@ class UserById(MethodView):
 
         if current_user_id != id:
             current_user = User.query.get_or_404(id, description="Your User have not been found")
-            if not current_user.is_admin:
+            if current_user.role != "admin":
                 abort(403, message="You are not authorized to view this user")
 
         user = User.query.get_or_404(id, description="User not found")
@@ -136,8 +136,11 @@ class Users(MethodView):
         user = User.query.filter_by(username=username).first()
 
         if user and user.password == password:
-            # Generate access token (JWT) using user's ID as the identity
-            access_token = create_access_token(identity=user.id)
+            # Generate access token (JWT) using user's ID as the identity and role
+            additional_claims = {
+                'role': user.role
+            }
+            access_token = create_access_token(identity=user.id,additional_claims=additional_claims)
             return jsonify(access_token=access_token)
         else:
             abort(401, message='Invalid username or password')
